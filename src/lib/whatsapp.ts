@@ -1,6 +1,6 @@
 import type { WhatsAppInquiry, ServiceBookingInquiry } from '@/types/database';
 
-const WHATSAPP_OWNER_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_OWNER_PHONE || '+254743490973';
+const WHATSAPP_OWNER_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_OWNER_PHONE || '+254742535339';
 const WHATSAPP_OWNER_NAME = process.env.NEXT_PUBLIC_WHATSAPP_OWNER_NAME || 'Gabriel';
 const PHARMACY_NAME = "Gabriel's Pharmacy";
 
@@ -185,7 +185,7 @@ export function getPharmacyPhone(): string {
  * Format phone number for display
  */
 export function formatPhoneNumber(phone: string): string {
-  // Format: +254 743 490 973
+  // Format: +254 742 535 339
   const cleaned = phone.replace(/[^\d+]/g, '');
   
   if (cleaned.startsWith('+254')) {

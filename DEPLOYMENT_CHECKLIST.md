@@ -26,7 +26,7 @@ Use this checklist to ensure everything is set up correctly before going live.
 ### 2. Environment Variables
 - [ ] `.env.local` exists and is configured
 - [ ] All Supabase credentials are correct
-- [ ] WhatsApp phone number is set: `+254743490973`
+- [ ] WhatsApp phone number is set: `+254742535339`
 - [ ] `.env.local` is in `.gitignore` (security!)
 
 ### 3. Data Migration
@@ -90,7 +90,7 @@ SELECT COUNT(*) FROM categories; -- Should be 4
   - [ ] Product name
   - [ ] Product price
   - [ ] Pharmacy greeting
-- [ ] Phone number is correct: +254 743 490 973
+- [ ] Phone number is correct: +254 742 535 339
 - [ ] Test on mobile device (opens WhatsApp app)
 
 ### 9. Mobile Responsiveness
@@ -207,7 +207,7 @@ If something doesn't work, check:
 - [ ] Test placeholder image URL directly
 
 ### WhatsApp Links Not Working
-- [ ] Verify phone number format: `+254743490973`
+- [ ] Verify phone number format: `+254742535339`
 - [ ] Test on mobile device (should open app)
 - [ ] Check browser allows opening external apps
 - [ ] Confirm WhatsApp is installed
@@ -258,7 +258,7 @@ When everything is ✅:
 - Review Vercel logs for deployment errors
 
 **Business Contact:**
-- **WhatsApp**: +254 743 490 973
+- **WhatsApp**: +254 742 535 339
 - **Location**: Umoja, Nairobi, Kenya
 
 ---

@@ -60,7 +60,7 @@ A modern, WhatsApp-first pharmacy e-commerce platform built with Next.js 14, Typ
    NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
    SUPABASE_SERVICE_KEY=your-service-key
-   NEXT_PUBLIC_WHATSAPP_OWNER_PHONE=+254743490973
+   NEXT_PUBLIC_WHATSAPP_OWNER_PHONE=+254742535339
    ```
 
 4. **Run the migration** (imports products from JSON):
@@ -122,7 +122,7 @@ const whatsappLink = getProductWhatsAppLink({
   productName: product.name,
   price: product.price,
 });
-// Opens: https://wa.me/254743490973?text=Hi%20Gabriel's%20Pharmacy...
+// Opens: https://wa.me/254742535339?text=Hi%20Gabriel's%20Pharmacy...
 ```
 
 ### Auto-Categorization
@@ -184,7 +184,7 @@ npm run lint         # Run ESLint
 
 - **Mobile**: Should open WhatsApp app directly
 - **Desktop**: Opens WhatsApp Web
-- **Format**: Ensure phone is `+254743490973` (E.164 format)
+- **Format**: Ensure phone is `+254742535339` (E.164 format)
 
 ## 🌐 Deployment
 
@@ -236,7 +236,7 @@ gabriels-pharmacy/
 
 **Gabriel's Pharmacy**
 - **Location**: Umoja, Nairobi, Kenya
-- **WhatsApp**: +254 743 490 973
+- **WhatsApp**: +254 742 535 339
 - **Hours**: Available 24/7
 
 ---

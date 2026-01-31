@@ -68,7 +68,7 @@ export default async function ServicesPage() {
             Chat with us on WhatsApp for personalized recommendations.
           </p>
           <a
-            href="https://wa.me/254743490973?text=Hi%20Gabriel's%20Pharmacy!%20I%20need%20help%20choosing%20a%20service."
+            href="https://wa.me/254742535339?text=Hi%20Gabriel's%20Pharmacy!%20I%20need%20help%20choosing%20a%20service."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-colors"

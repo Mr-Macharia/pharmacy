@@ -89,7 +89,7 @@ Update `.env.local`:
 NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 SUPABASE_SERVICE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-NEXT_PUBLIC_WHATSAPP_OWNER_PHONE=+254743490973
+NEXT_PUBLIC_WHATSAPP_OWNER_PHONE=+254742535339
 ```
 
 ## Step 3: Install Dependencies
@@ -165,7 +165,7 @@ You should see:
 → Check Storage bucket is public, placeholder exists
 
 ### WhatsApp link doesn't work
-→ Ensure phone number is in E.164 format: `+254743490973`
+→ Ensure phone number is in E.164 format: `+254742535339`
 
 ## 📚 Full Documentation
 

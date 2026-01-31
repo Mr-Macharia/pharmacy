@@ -62,7 +62,7 @@ The TypeScript-based pharmacy e-commerce platform has been successfully implemen
 - ✅ Pre-filled WhatsApp links
 - ✅ Consultation booking messages
 - ✅ Generic inquiry support
-- ✅ Phone number formatting (+254 743 490 973)
+- ✅ Phone number formatting (+254 742 535 339)
 
 ### 8. **Utilities & Helpers** ✅
 - ✅ Price parser (handles complex formats)
@@ -319,7 +319,7 @@ Charcoal Text:    #1F2121
 
 **Gabriel's Pharmacy**
 - **Location**: Umoja, Nairobi, Kenya
-- **WhatsApp**: +254 743 490 973
+- **WhatsApp**: +254 742 535 339
 - **Hours**: Available 24/7
 
 **Technical Support**
