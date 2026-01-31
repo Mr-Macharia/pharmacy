@@ -99,23 +99,27 @@ export function generateShortId(): string {
 export function categorizeProduct(name: string, description?: string): string {
   const text = `${name} ${description || ''}`.toLowerCase();
 
-  // Prescription keywords
-  if (/\b(prescription|rx|prescribed)\b/i.test(text)) {
+  // Prescription keywords (check FIRST - most specific)
+  if (
+    /\b(prescription|rx|prescribed|antibiotic|amoxicillin|azithromycin|ciprofloxacin|metformin|lisinopril|amlodipine|atorvastatin|metoprolol|losartan|levothyroxine|albuterol|omeprazole|simvastatin|warfarin|insulin|gabapentin|hydrochlorothiazide)\b/i.test(
+      text
+    )
+  ) {
     return 'prescriptions';
   }
 
-  // OTC Meds keywords
+  // OTC Meds keywords (expanded significantly)
   if (
-    /\b(pain|relief|cold|flu|allergy|fever|cough|headache|aspirin|ibuprofen|paracetamol|antihistamine)\b/i.test(
+    /\b(pain|relief|cold|flu|allergy|fever|cough|headache|aspirin|ibuprofen|paracetamol|panadol|tylenol|advil|motrin|antihistamine|antacid|gaviscon|tums|anti-diarrheal|imodium|laxative|dulcolax|motion sickness|dramamine|hydrocortisone|antifungal|athlete's foot|antiseptic|betadine|neosporin|bandage|first aid|nasal spray|throat lozenge|eye drops|ear drops|muscle rub|antibiotic cream|hemorrhoid|hydrocortisone cream)\b/i.test(
       text
     )
   ) {
     return 'otc-meds';
   }
 
-  // Health Essentials keywords
+  // Health Essentials keywords (more specific - removed generic "health")
   if (
-    /\b(vitamin|supplement|multivitamin|mineral|omega|probiotic|protein|calcium|iron|zinc|immune|health)\b/i.test(
+    /\b(vitamin|multivitamin|supplement|mineral|omega-3|omega 3|fish oil|probiotic|protein powder|whey protein|calcium|iron|zinc|magnesium|vitamin [abcdek]|b12|b-12|d3|b-complex|folic acid|biotin|glucosamine|collagen|turmeric|immune boost|elderberry|echinacea|coq10|melatonin)\b/i.test(
       text
     )
   ) {

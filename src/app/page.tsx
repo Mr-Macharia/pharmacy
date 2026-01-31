@@ -1,6 +1,7 @@
 import HeroSection from "@/components/home/HeroSection";
 import CategoriesSection from "@/components/home/CategoriesSection";
 import TelehealthBanner from "@/components/home/TelehealthBanner";
+import PrescriptionConsultSection from "@/components/home/PrescriptionConsultSection";
 import ServicesSection from "@/components/home/ServicesSection";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 
@@ -13,6 +14,7 @@ export default function Home() {
       <HeroSection />
       <CategoriesSection />
       <TelehealthBanner />
+      <PrescriptionConsultSection />
       <ServicesSection />
       <FeaturedProducts />
     </>

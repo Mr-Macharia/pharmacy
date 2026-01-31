@@ -3,25 +3,25 @@ import type { Category } from '@/types/database';
 
 const defaultCategories = [
   {
-    slug: 'prescriptions',
-    name: 'Prescriptions',
-    description: 'Easy refill & transfer',
-    imageUrl: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&auto=format&fit=crop',
-    bgColor: 'from-blue-50 to-blue-100',
-  },
-  {
     slug: 'otc-meds',
-    name: 'OTC Meds',
-    description: 'Cold, Flu & Allergy relief',
+    name: 'OTC Medications',
+    description: 'Cold, Flu & Pain Relief',
     imageUrl: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=600&auto=format&fit=crop',
     bgColor: 'from-green-50 to-green-100',
   },
   {
     slug: 'health-essentials',
-    name: 'Health Essentials',
-    description: 'Vitamins & Daily Supplements',
+    name: 'Vitamins & Supplements',
+    description: 'Health & Wellness Products',
     imageUrl: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=600&auto=format&fit=crop',
     bgColor: 'from-orange-50 to-orange-100',
+  },
+  {
+    slug: 'general',
+    name: 'Personal Care',
+    description: 'Beauty, Skincare & Essentials',
+    imageUrl: 'https://images.unsplash.com/photo-1556228578-dd4c8838e2b7?w=600&auto=format&fit=crop',
+    bgColor: 'from-purple-50 to-purple-100',
   },
 ];
 

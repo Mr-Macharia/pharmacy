@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import ProductCard from '@/components/products/ProductCard';
 import type { Product, Category } from '@/types/database';
 import { Loader2 } from 'lucide-react';
@@ -10,45 +10,79 @@ interface ProductGridProps {
   categories: Category[];
   totalCount: number;
   initialLimit: number;
+  initialCategory?: string;
+  initialSearch?: string;
 }
 
 export default function ProductGrid({
   initialProducts,
   categories,
-  totalCount,
+  totalCount: initialTotalCount,
   initialLimit,
+  initialCategory = '',
+  initialSearch = '',
 }: ProductGridProps) {
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [loading, setLoading] = useState(false);
   const [offset, setOffset] = useState(initialLimit);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
-
-  // Client-side filtering
-  const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
-      const matchesSearch =
-        !searchQuery ||
-        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.description?.toLowerCase().includes(searchQuery.toLowerCase());
-
-      const matchesCategory =
-        !selectedCategory || product.category_id === selectedCategory;
-
-      return matchesSearch && matchesCategory;
-    });
-  }, [products, searchQuery, selectedCategory]);
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
+  const [selectedCategory, setSelectedCategory] = useState<string>(() => {
+    // Convert slug to ID if initial category is a slug
+    if (initialCategory) {
+      const category = categories.find(c => c.slug === initialCategory);
+      return category?.id || '';
+    }
+    return '';
+  });
+  const [totalCount, setTotalCount] = useState(initialTotalCount);
+  const [searchLoading, setSearchLoading] = useState(false);
 
   const hasMore = offset < totalCount;
+
+  // Debounced search function
+  const performSearch = useCallback(async (search: string, category: string) => {
+    setSearchLoading(true);
+    try {
+      const params = new URLSearchParams();
+      if (search) params.append('search', search);
+      if (category) params.append('category', category);
+      params.append('limit', initialLimit.toString());
+      params.append('offset', '0');
+
+      const response = await fetch(`/api/products?${params}`);
+      const data = await response.json();
+
+      setProducts(data.products || []);
+      setTotalCount(data.total || 0);
+      setOffset(initialLimit);
+    } catch (error) {
+      console.error('Search failed:', error);
+    } finally {
+      setSearchLoading(false);
+    }
+  }, [initialLimit]);
+
+  // Debounce search input
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      performSearch(searchQuery, selectedCategory);
+    }, 300);
+
+    return () => clearTimeout(timeoutId);
+  }, [searchQuery, selectedCategory, performSearch]);
 
   const loadMore = async () => {
     if (loading || !hasMore) return;
 
     setLoading(true);
     try {
-      const response = await fetch(
-        `/api/products?limit=${initialLimit}&offset=${offset}`
-      );
+      const params = new URLSearchParams();
+      if (searchQuery) params.append('search', searchQuery);
+      if (selectedCategory) params.append('category', selectedCategory);
+      params.append('limit', initialLimit.toString());
+      params.append('offset', offset.toString());
+
+      const response = await fetch(`/api/products?${params}`);
       const data = await response.json();
 
       setProducts((prev) => [...prev, ...(data.products || [])]);
@@ -89,20 +123,28 @@ export default function ProductGrid({
       </div>
 
       {/* Product Grid */}
-      {filteredProducts.length > 0 ? (
+      {searchLoading ? (
+        <div className="flex justify-center items-center py-20">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        </div>
+      ) : products.length > 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {filteredProducts.map((product) => (
+          {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-text-secondary">No products found</p>
+          <p className="text-text-secondary">
+            {searchQuery || selectedCategory
+              ? 'No products found matching your criteria'
+              : 'No products available'}
+          </p>
         </div>
       )}
 
       {/* Load More Button */}
-      {hasMore && !searchQuery && !selectedCategory && (
+      {hasMore && !searchLoading && (
         <div className="flex justify-center pt-6">
           <button
             onClick={loadMore}
