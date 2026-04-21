@@ -20,12 +20,7 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
-  // Set explicit workspace root
-  experimental: {
-    turbo: {
-      root: path.resolve(__dirname),
-    },
-  },
+
 };
 
 export default nextConfig;
