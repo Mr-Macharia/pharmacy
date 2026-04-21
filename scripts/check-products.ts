@@ -19,18 +19,18 @@ async function checkProducts() {
     .select('name, categories(slug)')
     .order('name', { ascending: true });
 
-  console.log(`📦 Total products: ${allProducts?.length}\n`);
+  console.log(`Total products: ${allProducts?.length}\n`);
 
   // Group by category
   const byCategory: Record<string, string[]> = {};
   allProducts?.forEach(p => {
-    const cat = p.categories?.slug || 'unknown';
+    const cat = (p.categories as any)?.slug || 'unknown';
     if (!byCategory[cat]) byCategory[cat] = [];
     byCategory[cat].push(p.name);
   });
 
   // Show counts
-  console.log('📊 Category distribution:');
+  console.log('Category distribution:');
   Object.entries(byCategory).forEach(([cat, products]) => {
     console.log(`  ${cat}: ${products.length} products`);
   });
@@ -65,7 +65,7 @@ async function checkProducts() {
   if (potentialPrescriptions && potentialPrescriptions.length > 0) {
     console.log(`Found ${potentialPrescriptions.length} products with prescription drug names:`);
     potentialPrescriptions.forEach(p => {
-      console.log(`  - ${p.name} [currently: ${p.categories?.slug}]`);
+      console.log(`  - ${p.name} [currently: ${(p.categories as any)?.slug}]`);
     });
   } else {
     console.log('⚠️  No obvious prescription medications found by drug name');
@@ -80,7 +80,7 @@ async function checkProducts() {
   if (withDosage && withDosage.length > 0) {
     console.log('Sample products with dosage information:');
     withDosage.forEach(p => {
-      console.log(`  - ${p.name} [${p.categories?.slug}]`);
+      console.log(`  - ${p.name} [${(p.categories as any)?.slug}]`);
     });
   }
 }
