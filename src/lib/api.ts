@@ -17,10 +17,11 @@ async function searchByIntent(searchTerm: string): Promise<string[] | null> {
     .eq('is_active', true)
     .single();
   
-  if (exactMatch?.product_ids?.length) {
+  if ((exactMatch as any)?.product_ids?.length) {
     // Increment search count for analytics (fire and forget)
-    supabase.rpc('increment_intent_search_count', { keyword: normalizedTerm }).then();
-    return exactMatch.product_ids;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (supabase as any).rpc('increment_intent_search_count', { keyword: normalizedTerm }).then();
+    return (exactMatch as any).product_ids;
   }
   
   // Try matching against search_variations array
@@ -32,10 +33,11 @@ async function searchByIntent(searchTerm: string): Promise<string[] | null> {
     .limit(1)
     .single();
   
-  if (variationMatch?.product_ids?.length) {
+  if ((variationMatch as any)?.product_ids?.length) {
     // Increment count for the main keyword
-    supabase.rpc('increment_intent_search_count', { keyword: variationMatch.intent_keyword }).then();
-    return variationMatch.product_ids;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (supabase as any).rpc('increment_intent_search_count', { keyword: (variationMatch as any).intent_keyword }).then();
+    return (variationMatch as any).product_ids;
   }
   
   return null;
