@@ -5,7 +5,7 @@ import { getServices } from '@/lib/services';
 import ServiceGrid from '@/components/services/ServiceGrid';
 
 export const metadata: Metadata = {
-  title: 'Healthcare Services | Gabriel\'s Pharmacy',
+  title: 'Healthcare Services | Chalrose Pharmaceuticals Limited',
   description: 'Professional healthcare services including blood pressure monitoring, glucose testing, medication counseling, and more. Book your appointment via WhatsApp.',
 };
 
@@ -45,7 +45,7 @@ export default async function ServicesPage() {
 
           {/* Description */}
           <p className="text-text-secondary max-w-3xl leading-relaxed">
-            Gabriel's Pharmacy offers comprehensive healthcare services beyond traditional medication dispensing. 
+            Chalrose Pharmaceuticals Limited offers comprehensive healthcare services beyond traditional medication dispensing. 
             From diagnostic tests and health screenings to medication counseling and chronic disease management, 
             we're here to support your health journey. Book any service easily via WhatsApp.
           </p>
@@ -68,7 +68,7 @@ export default async function ServicesPage() {
             Chat with us on WhatsApp for personalized recommendations.
           </p>
           <a
-            href="https://wa.me/254742535339?text=Hi%20Gabriel's%20Pharmacy!%20I%20need%20help%20choosing%20a%20service."
+            href="https://wa.me/254111258520?text=Hi%20Chalrose%20Pharmaceuticals!%20I%20need%20help%20choosing%20a%20service."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-primary-dark transition-colors"

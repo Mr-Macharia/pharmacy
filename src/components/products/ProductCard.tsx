@@ -1,6 +1,6 @@
 'use client';
 
-import { Plus, Star } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Product } from '@/types/database';
@@ -64,12 +64,6 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       {/* Product Info */}
       <div className="flex flex-col gap-1">
-        {/* Rating */}
-        <div className="flex items-center gap-1">
-          <Star className="w-3.5 h-3.5 text-warning fill-warning" />
-          <span className="text-xs font-medium text-text-primary">{product.rating.toFixed(1)}</span>
-        </div>
-
         {/* Name */}
         <Link href={`/products/${product.slug}`}>
           <h3 className="text-text-primary text-sm font-bold leading-tight line-clamp-2 min-h-[2.5em] hover:text-primary transition-colors">

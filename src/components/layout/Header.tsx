@@ -37,7 +37,7 @@ export default function Header() {
                 </svg>
               </div>
               <h2 className="text-lg font-bold leading-tight tracking-tight hidden sm:block">
-                Gabriel&apos;s Pharmacy
+                Chalrose Pharmaceuticals
               </h2>
             </Link>
 

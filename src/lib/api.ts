@@ -2,6 +2,46 @@ import { supabase } from './supabase';
 import type { Product, ProductWithCategory, Category, ProductFilters, PaginationParams, ProductsResponse } from '@/types/database';
 
 /**
+ * Search by intent - Stage 1 (fastest path)
+ * Checks intent_to_products table for direct keyword matches
+ * Returns product IDs if found, null if no match
+ */
+async function searchByIntent(searchTerm: string): Promise<string[] | null> {
+  const normalizedTerm = searchTerm.toLowerCase().trim();
+  
+  // Try exact keyword match first
+  const { data: exactMatch } = await supabase
+    .from('intent_to_products')
+    .select('product_ids')
+    .eq('intent_keyword', normalizedTerm)
+    .eq('is_active', true)
+    .single();
+  
+  if (exactMatch?.product_ids?.length) {
+    // Increment search count for analytics (fire and forget)
+    supabase.rpc('increment_intent_search_count', { keyword: normalizedTerm }).then();
+    return exactMatch.product_ids;
+  }
+  
+  // Try matching against search_variations array
+  const { data: variationMatch } = await supabase
+    .from('intent_to_products')
+    .select('product_ids, intent_keyword')
+    .contains('search_variations', [normalizedTerm])
+    .eq('is_active', true)
+    .limit(1)
+    .single();
+  
+  if (variationMatch?.product_ids?.length) {
+    // Increment count for the main keyword
+    supabase.rpc('increment_intent_search_count', { keyword: variationMatch.intent_keyword }).then();
+    return variationMatch.product_ids;
+  }
+  
+  return null;
+}
+
+/**
  * Fetch all categories
  */
 export async function getCategories(): Promise<Category[]> {
@@ -38,22 +78,97 @@ export async function getCategoryBySlug(slug: string): Promise<Category | null> 
 
 /**
  * Fetch products with filters and pagination
+ * Uses 2-stage search:
+ * Stage 1: Intent lookup (fast path for symptoms/conditions)
+ * Stage 2: Full-text/ILIKE search (fallback)
  */
 export async function getProducts(
   filters: ProductFilters = {},
   pagination: PaginationParams = { limit: 15, offset: 0 }
 ): Promise<ProductsResponse> {
+  // If search is provided, use the Supabase RPC for reliable hybrid search
+  if (filters.search) {
+    const searchTerm = filters.search.trim();
+
+    // Stage 1: Try intent-based search first (for single terms or known intents)
+    const words = searchTerm.split(/\s+/);
+    if (words.length <= 2) {
+      const intentProductIds = await searchByIntent(searchTerm);
+      if (intentProductIds && intentProductIds.length > 0) {
+        // Found intent match - fetch those specific products
+        let intentQuery = supabase
+          .from('products')
+          .select('*, category:categories(*)', { count: 'exact' })
+          .in('id', intentProductIds);
+        
+        if (filters.categoryId) intentQuery = intentQuery.eq('category_id', filters.categoryId);
+        if (filters.minPrice !== undefined) intentQuery = intentQuery.gte('price', filters.minPrice);
+        if (filters.maxPrice !== undefined) intentQuery = intentQuery.lte('price', filters.maxPrice);
+        if (filters.inStock !== undefined) intentQuery = intentQuery.eq('in_stock', filters.inStock);
+
+        intentQuery = intentQuery
+          .range(pagination.offset, pagination.offset + pagination.limit - 1)
+          .order('rating', { ascending: false });
+
+        const { data, error, count } = await intentQuery;
+        if (!error && data && data.length > 0) {
+          return { products: data, total: count || data.length, limit: pagination.limit, offset: pagination.offset };
+        }
+      }
+    }
+
+    // Stage 2: Use the search_products RPC (hybrid full-text + ILIKE)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data: rpcData, error: rpcError } = await (supabase as any).rpc('search_products', {
+      p_search_term: searchTerm,
+      p_category_id: filters.categoryId || null,
+      p_limit: pagination.limit,
+      p_offset: pagination.offset,
+    });
+
+    if (!rpcError && rpcData) {
+      // Count total matching for pagination - use a simpler count query
+      const { count } = await supabase
+        .from('products')
+        .select('*', { count: 'exact', head: true })
+        .or(`name.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%,manufacturer.ilike.%${searchTerm}%`);
+
+      return {
+        products: rpcData as Product[],
+        total: count || rpcData.length,
+        limit: pagination.limit,
+        offset: pagination.offset,
+      };
+    }
+
+    // Stage 3: Fallback to ILIKE if RPC fails
+    const orConditions = words.map(term =>
+      `name.ilike.%${term}%,description.ilike.%${term}%`
+    ).join(',');
+    let fallbackQuery = supabase
+      .from('products')
+      .select('*, category:categories(*)', { count: 'exact' })
+      .or(orConditions);
+    if (filters.categoryId) fallbackQuery = fallbackQuery.eq('category_id', filters.categoryId);
+    fallbackQuery = fallbackQuery
+      .range(pagination.offset, pagination.offset + pagination.limit - 1)
+      .order('created_at', { ascending: false });
+
+    const { data: fbData, error: fbError, count: fbCount } = await fallbackQuery;
+    if (!fbError) {
+      return { products: fbData || [], total: fbCount || 0, limit: pagination.limit, offset: pagination.offset };
+    }
+
+    return { products: [], total: 0, limit: pagination.limit, offset: pagination.offset };
+  }
+
+  // No search — standard filtered listing
   let query = supabase
     .from('products')
     .select('*, category:categories(*)', { count: 'exact' });
 
-  // Apply filters
   if (filters.categoryId) {
     query = query.eq('category_id', filters.categoryId);
-  }
-
-  if (filters.search) {
-    query = query.or(`name.ilike.%${filters.search}%,description.ilike.%${filters.search}%`);
   }
 
   if (filters.minPrice !== undefined) {
@@ -72,7 +187,6 @@ export async function getProducts(
     query = query.gte('rating', filters.minRating);
   }
 
-  // Apply pagination
   query = query
     .range(pagination.offset, pagination.offset + pagination.limit - 1)
     .order('created_at', { ascending: false });

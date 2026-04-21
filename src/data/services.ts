@@ -18,7 +18,7 @@ export const services: Service[] = [
     category: 'healthcare-monitoring',
     description: 'Non-invasive measurement of systolic and diastolic pressure using an automated blood pressure monitor. Essential for managing hypertension and preventing strokes and heart attacks.',
     duration: '2-3 minutes',
-    priceRange: 'Free with medication / KES 200-300',
+    priceRange: 'KES 50 - 100',
     icon: 'Activity',
     featured: true,
     keyInfo: [
@@ -35,7 +35,7 @@ export const services: Service[] = [
     category: 'healthcare-monitoring',
     description: 'Quick blood test to check blood sugar levels using a digital glucometer. Results available within 5 seconds. Early detection prevents diabetes complications.',
     duration: '1-2 minutes',
-    priceRange: 'KES 300-500',
+    priceRange: 'KES 100 - 150',
     icon: 'Droplet',
     featured: true,
     keyInfo: [
@@ -52,7 +52,7 @@ export const services: Service[] = [
     category: 'healthcare-monitoring',
     description: 'Blood test to detect malaria parasites using rapid test kit. Quick turnaround for immediate treatment decisions.',
     duration: '15-20 minutes',
-    priceRange: 'KES 400-600',
+    priceRange: 'KES 150 - 200',
     icon: 'Bug',
     featured: false,
     keyInfo: [
@@ -226,7 +226,7 @@ export const services: Service[] = [
     category: 'health-wellness',
     description: 'Confidential counseling on contraceptive options and reproductive health with product availability information.',
     duration: '15-20 minutes',
-    priceRange: 'Free - KES 300',
+    priceRange: 'Free - KES 200',
     icon: 'Users',
     featured: false,
     keyInfo: [
@@ -245,7 +245,7 @@ export const services: Service[] = [
     category: 'convenience',
     description: 'Same-day or next-day delivery of medications and health products to your home or office in Umoja and surrounding areas.',
     duration: 'Same-day / Next-day',
-    priceRange: 'KES 150-300 delivery fee',
+    priceRange: 'KES 100 - 300 delivery fee',
     icon: 'Truck',
     featured: true,
     keyInfo: [

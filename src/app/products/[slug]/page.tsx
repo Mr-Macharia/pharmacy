@@ -2,7 +2,7 @@ import { getProductBySlug, getRelatedProducts } from '@/lib/api';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Star, ArrowLeft, Package, Shield } from 'lucide-react';
+import { ArrowLeft, Package, Shield } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { getProductImageUrl } from '@/lib/supabase';
 import { getProductWhatsAppLink } from '@/lib/whatsapp';
@@ -90,24 +90,6 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                 {product.name}
               </h1>
 
-              {/* Rating */}
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${
-                        i < Math.floor(product.rating)
-                          ? 'text-warning fill-warning'
-                          : 'text-border'
-                      }`}
-                    />
-                  ))}
-                </div>
-                <span className="text-sm text-text-secondary">
-                  {product.rating.toFixed(1)} ({product.review_count} reviews)
-                </span>
-              </div>
             </div>
 
             {/* Price */}

@@ -11,12 +11,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Gabriel's Pharmacy - Your Health, Delivered Safely | Umoja, Nairobi",
+  title: "Chalrose Pharmaceuticals Limited - Your Health, Delivered Safely | Umoja, Nairobi",
   description: "Order prescription and OTC medications from licensed pharmacists in Umoja, Nairobi. Fast delivery, 24/7 consultation via WhatsApp. Browse vitamins, supplements, and health essentials.",
-  keywords: "pharmacy, medications, Nairobi, Umoja, prescriptions, OTC medicine, vitamins, supplements, health, Kenya",
-  authors: [{ name: "Gabriel's Pharmacy" }],
+  keywords: "pharmacy, medications, Nairobi, Umoja, prescriptions, OTC medicine, vitamins, supplements, health, Kenya, Chalrose",
+  authors: [{ name: "Chalrose Pharmaceuticals Limited" }],
   openGraph: {
-    title: "Gabriel's Pharmacy - Your Health, Delivered Safely",
+    title: "Chalrose Pharmaceuticals Limited - Your Health, Delivered Safely",
     description: "Your trusted pharmacy in Umoja, Nairobi. Browse medications, consult pharmacists, and get same-day delivery.",
     type: "website",
     locale: "en_KE",

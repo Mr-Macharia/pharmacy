@@ -1,8 +1,8 @@
 import type { WhatsAppInquiry, ServiceBookingInquiry } from '@/types/database';
 
-const WHATSAPP_OWNER_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_OWNER_PHONE || '+254742535339';
-const WHATSAPP_OWNER_NAME = process.env.NEXT_PUBLIC_WHATSAPP_OWNER_NAME || 'Gabriel';
-const PHARMACY_NAME = "Gabriel's Pharmacy";
+const WHATSAPP_OWNER_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_OWNER_PHONE || '+254111258520';
+const WHATSAPP_OWNER_NAME = process.env.NEXT_PUBLIC_WHATSAPP_OWNER_NAME || 'Chalrose Pharmaceuticals Limited';
+const PHARMACY_NAME = "Chalrose Pharmaceuticals Limited";
 
 /**
  * Generate WhatsApp deep link URL

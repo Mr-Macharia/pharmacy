@@ -24,10 +24,10 @@ export default function Footer() {
                   <path d="M21 9h-1.42l-3.712-6.496-1.736.992L17.277 9H6.723l3.145-5.504-1.736-.992L4.42 9H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1zM16 11v2h-3v3h-2v-3H8v-2h3V8h2v3h3z" />
                 </svg>
               </div>
-              Gabriel&apos;s Pharmacy
+              Chalrose Pharmaceuticals Limited
             </div>
             <p className="text-text-secondary text-sm leading-relaxed">
-              Your trusted partner for health and wellness delivered safely to your home in Umoja, Nairobi.
+              Your trusted partner for health and wellness in Umoja, Nairobi — providing quality medications and healthcare services.
             </p>
             <div className="flex flex-col gap-2 text-sm">
               <a
@@ -48,7 +48,7 @@ export default function Footer() {
           <div className="flex flex-col gap-2">
             <h4 className="text-text-primary font-bold mb-2">Shop</h4>
             <Link
-              href="/products?category=prescriptions"
+              href="/consultations"
               className="text-text-secondary hover:text-primary text-sm transition-colors"
             >
               Prescriptions
@@ -138,7 +138,7 @@ export default function Footer() {
         <div className="mt-10 pt-6 border-t border-border">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-text-tertiary text-xs text-center sm:text-left">
-              © {new Date().getFullYear()} Gabriel&apos;s Pharmacy. All rights reserved.
+              © {new Date().getFullYear()} Chalrose Pharmaceuticals Limited. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
               <span className="text-text-tertiary text-xs">Available 24/7</span>
