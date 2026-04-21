@@ -3,13 +3,5 @@
   "devCommand": "next dev",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "regions": ["sin1"],
-  "env": {
-    "NEXT_PUBLIC_SUPABASE_URL": "@supabase_url",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase_anon_key",
-    "SUPABASE_SERVICE_KEY": "@supabase_service_key",
-    "NEXT_PUBLIC_WHATSAPP_OWNER_PHONE": "@whatsapp_phone",
-    "NEXT_PUBLIC_WHATSAPP_OWNER_NAME": "@whatsapp_name",
-    "NEXT_PUBLIC_APP_NAME": "Gabriel's Pharmacy"
-  }
+  "regions": ["sin1"]
 }
