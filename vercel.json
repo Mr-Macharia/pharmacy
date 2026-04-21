@@ -11,14 +11,5 @@
     "NEXT_PUBLIC_WHATSAPP_OWNER_PHONE": "@whatsapp_phone",
     "NEXT_PUBLIC_WHATSAPP_OWNER_NAME": "@whatsapp_name",
     "NEXT_PUBLIC_APP_NAME": "Gabriel's Pharmacy"
-  },
-  "images": {
-    "domains": ["qgxfgpeqqrhtdtdpamra.supabase.co"],
-    "remotePatterns": [
-      {
-        "protocol": "https",
-        "hostname": "**.supabase.co"
-      }
-    ]
   }
 }
