@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import ProductCard from '@/components/products/ProductCard';
 import type { Product, Category } from '@/types/database';
@@ -136,7 +135,6 @@ export default function ProductGrid({
   initialCategory = '',
   initialSearch = '',
 }: ProductGridProps) {
-  const router = useRouter();
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [loading, setLoading] = useState(false);
   const [offset, setOffset] = useState(initialLimit);
@@ -285,13 +283,7 @@ export default function ProductGrid({
           <select
             value={selectedCategory}
             onChange={(e) => {
-              const value = e.target.value;
-              const selectedCat = categories.find(c => c.id === value);
-              if (selectedCat?.slug === 'prescriptions') {
-                router.push('/consultations');
-                return;
-              }
-              setSelectedCategory(value);
+              setSelectedCategory(e.target.value);
             }}
             className="px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-surface"
           >
