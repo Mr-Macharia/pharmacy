@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Search, ShoppingCart, User, Menu, Phone } from 'lucide-react';
 import { useState } from 'react';
 import { getGenericWhatsAppLink } from '@/lib/whatsapp';
@@ -26,15 +27,15 @@ export default function Header() {
           <div className="flex items-center gap-4 lg:gap-8">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 text-text-primary">
-              <div className="w-8 h-8 flex items-center justify-center text-primary">
-                <svg
-                  className="w-8 h-8"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M21 9h-1.42l-3.712-6.496-1.736.992L17.277 9H6.723l3.145-5.504-1.736-.992L4.42 9H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1zM16 11v2h-3v3h-2v-3H8v-2h3V8h2v3h3z" />
-                </svg>
+              <div className="w-14 h-14 flex items-center justify-center">
+                <Image
+                  src="/logo.webp"
+                  alt="Chalrose Pharmaceuticals Logo"
+                  width={56}
+                  height={56}
+                  className="w-full h-full object-contain"
+                  priority
+                />
               </div>
               <h2 className="text-lg font-bold leading-tight tracking-tight hidden sm:block">
                 Chalrose Pharmaceuticals

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone, MapPin, Mail } from 'lucide-react';
 import { formatPhoneNumber, getPharmacyPhone } from '@/lib/whatsapp';
 
@@ -14,15 +15,14 @@ export default function Footer() {
           {/* About Section */}
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2 text-text-primary font-bold text-lg">
-              <div className="w-6 h-6 flex items-center justify-center text-primary">
-                <svg
-                  className="w-6 h-6"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M21 9h-1.42l-3.712-6.496-1.736.992L17.277 9H6.723l3.145-5.504-1.736-.992L4.42 9H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V10a1 1 0 0 0-1-1zM16 11v2h-3v3h-2v-3H8v-2h3V8h2v3h3z" />
-                </svg>
+              <div className="w-32 h-32 flex items-center justify-center">
+                <Image
+                  src="/logo.webp"
+                  alt="Chalrose Pharmaceuticals Logo"
+                  width={128}
+                  height={128}
+                  className="w-full h-full object-contain"
+                />
               </div>
               Chalrose Pharmaceuticals Limited
             </div>
